@@ -1,6 +1,11 @@
 <h1>Convert SRT to TEI</h1>
 
 <div class="row">
+
+<% if @conversion.errors.any? %>
+	ERRRRRRROOOOOOORRRRSSSS
+<% end %>
+
 <%= form_for @conversion do |f| %>
 	<%= f.label :title %>
 	<%= f.text_field :title %>
@@ -17,7 +22,18 @@
 	<%= f.label :description %>
 	<%= f.text_area :description %>
 	<br>
+	<%= f.file_field :file %>
+	<br>
 
 	<%= f.submit "Convert Now" %>
 <% end %>
 </div>
+
+<script type="text/javascript">
+  $('#conversion_file').bind('change', function() {
+    var size_in_megabytes = this.files[0].size/1024/1024;
+    if (size_in_megabytes > 5) {
+      alert('Maximum file size is 5MB. Please choose a smaller file.');
+    }
+  });
+</script>
