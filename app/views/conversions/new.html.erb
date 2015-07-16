@@ -1,2 +1,23 @@
-<h1>Conversions#new</h1>
-<p>Find me in app/views/conversions/new.html.erb</p>
+<h1>Convert SRT to TEI</h1>
+
+<div class="row">
+<%= form_for @conversion do |f| %>
+	<%= f.label :title %>
+	<%= f.text_field :title %>
+	<br>
+	<%= f.label :author %>
+	<%= f.text_field :author %>
+	<br>
+	<%= f.label :pid %>
+	<%= f.text_field :pid %>
+	<br>
+	<%= f.label :recording %>
+	<%= f.text_area :recording %>
+	<br>
+	<%= f.label :description %>
+	<%= f.text_area :description %>
+	<br>
+
+	<%= f.submit "Convert Now" %>
+<% end %>
+</div>
