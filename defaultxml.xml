@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI>
+  <teiHeader>
+    <fileDesc>
+      <titleStmt>
+        <title/>
+        <author/>
+      </titleStmt>
+      <extent/>
+      <publicationStmt>
+        <distribution>Tufts Technology Services</distribution>
+        <address>
+          <addrLine>Tufts University</addrLine>
+          <addrLine>16 Dearborn Road</addrLine>
+          <addrLine>Somerville, MA, 02155</addrLine>
+        </address>
+        <idno/>
+        <availability status="free">
+          <p>This publication is freely available for scholarly or educational use.</p>
+        </availability>
+      </publicationStmt>
+      <sourceDesc>
+        <recordingStmt>
+          <recording type="audio" dur="142501ms">
+            <date/>
+            <equipment>
+              <p/>
+            </equipment>
+            <respStmt>
+              <resp/>
+              <name/>
+            </respStmt>
+          </recording>
+        </recordingStmt>
+      </sourceDesc>
+    </fileDesc>
+    <encodingDesc>
+      <editorialDecl>
+        <stdVals>Standard date values are given in ISO form: yyyy-mm-dd.<p/></stdVals>
+      </editorialDecl>
+      <classDecl>
+        <taxonomy id="LCSH">
+          <bible>
+            <title>Library of Congress</title>
+          </bible>
+        </taxonomy>
+      </classDecl>
+    </encodingDesc>
+    <profileDesc>
+      <creation>
+        <date/>
+      </creation>
+      <langUsage>
+        <language id="EN" usage="100">English.</language>
+      </langUsage>
+      <particDesc/>
+    </profileDesc>
+  </teiHeader>
+  <text>
+    <body>
+      <timeline id="transcript_timeline" unit="millisecond" origin="timepoint_begin">
+        <when id="timepoint_begin" absolute="beginning of recording"/>
+<when id="timepoint_1" since="timepoint_begin" interval="137440"/>
+<when id="timepoint_2" since="timepoint_begin" interval="140476"/>
+<when id="timepoint_end" since="timepoint_begin" interval="142501"/>
+      </timeline><div1 id="transcript.1" n="Transcript"><u rend="transcript_chunk" start="timepoint_1" n="1" end="timepoint_2">
+<u>Can you believe Hank did that? He’s such a pig!</u>
+</u><u rend="transcript_chunk" start="timepoint_2" n="2" end="timepoint_3">
+<u>Yes, yes I can.</u>
+</u></div1>
+
+    </body>
+  </text>
+</TEI>

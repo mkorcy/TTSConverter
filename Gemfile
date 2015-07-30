@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+gem 'srt'
+gem 'nokogiri' 
 gem 'rails',                   '4.2.2'
 gem 'bcrypt',                  '3.1.7'
 gem 'faker',                   '1.4.2'
