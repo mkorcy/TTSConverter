@@ -1,0 +1,106 @@
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+body {
+	text-align: center;
+	font-family: raleway; 
+}
+
+label {
+	display: block;
+	margin-top: 20px
+}
+
+.errors {
+	color: red;
+}
+
+h1 {
+	color: #4f91cd;
+}
+
+#description {
+    margin-bottom: 20px;
+}
+
+.textinput{
+    border-radius: 2px;
+    border-style: solid;
+    border-width: 1px;
+    width: 25%;
+}
+.textarea{
+    border-radius: 2px;
+    border-style: solid;
+    border-width: 1px;
+    width: 25%;
+}
+
+.filenamefield{
+    display: block;
+    margin: auto;
+}
+
+#filenamefield{
+    text-align: center;
+    margin-top: 5px;
+}
+
+.btn-file {
+  position: relative;
+  overflow: hidden;
+}
+.btn-file input[type=file] {
+  position: absolute;
+  top: 0;
+  right: 0;
+  min-width: 100%;
+  min-height: 100%;
+  font-size: 100px;
+  text-align: right;
+  filter: alpha(opacity=0);
+  opacity: 0;
+  background: red;
+  cursor: inherit;
+  display: block;
+}
+
+.convertbutton{
+    border-style: solid;
+    background-color: #4f91cd;
+    border: 0px;
+    height: 40px;
+    width: 180px;
+    text-align: center;
+    font-weight: 400;
+    font-size:25px;
+    color: white;
+    border-radius: 2px;
+    letter-spacing: 1px;
+    margin: 20px;
+    border-radius: 5px
+}
+
+.hidden {
+    display: none;
+}
+
+.unhidden{
+    display: block;
+}
+
+#convertagain{
+    border-style: solid;
+    background-color: #4f91cd;
+    border: 0px;
+    height: 40px;
+    width: 180px;
+    text-align: center;
+    font-weight: 400;
+    font-size:15px;
+    color: white;
+    border-radius: 2px;
+    letter-spacing: 1px;
+    margin: auto;
+    border-radius: 5px;
+}

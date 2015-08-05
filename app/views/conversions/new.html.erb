@@ -1,35 +1,56 @@
 <h1>Convert SRT to TEI</h1>
 
-<div class="row">
 
 <% if @conversion.errors.any? %>
-	ERRRRRRROOOOOOORRRRSSSS
+	<div class: 'errors'>
+		Please fill in all fields. File must be smaller than 5MB. 
+	</div>
 <% end %>
+
 
 <%= form_for @conversion do |f| %>
 	<%= f.label :title %>
-	<%= f.text_field :title %>
+	<%= f.text_field :title, class: 'textinput' %>
 	<br>
 	<%= f.label :author %>
-	<%= f.text_field :author %>
+	<%= f.text_field :author, class: 'textinput' %>
 	<br>
-	<%= f.label :pid %>
-	<%= f.text_field :pid %>
+	<%= f.label :pid, "PID" %>
+	<%= f.text_field :pid, class: 'textinput' %>
 	<br>
-	<%= f.label :recording %>
-	<%= f.text_area :recording %>
+	<%= f.label :recording, "Recording Equipment" %>
+	<%= f.text_area :recording, class: 'textarea' %>
 	<br>
 	<%= f.label :description %>
-	<%= f.text_area :description %>
+	<%= f.text_area :description, class: 'textarea', id: "description" %>
 	<br>
-	<%= f.file_field :file %>
+	<span class="btn btn-default btn-file"> Select File
+		<%= f.file_field :file, class: 'fileinput' %>
+	</span>
 	<br>
 
-	<%= f.submit "Convert Now" %>
+	<div class="filenamefield">
+		<input type="text" class= "textinput" id="filenamefield" placeholder="No file selected">
+	</div>
+
+
+	<%= f.submit "Convert Now", class: 'convertbutton', onclick:"unhide(this,'convertagain')"%>
 <% end %>
+
+<div class="centered">
+	<button class="hidden" id="convertagain" type="button" >Convert Another File</button>
 </div>
 
+
 <script type="text/javascript">
+
+//function to unhide the convert again button after conversion
+function unhide(clickedButton, hiddenItem){
+	var item = document.getElementById(hiddenItem);
+	item.className = 'unhidden';
+}
+
+
   $('#conversion_file').bind('change', function() {
     var size_in_megabytes = this.files[0].size/1024/1024;
     if (size_in_megabytes > 5) {

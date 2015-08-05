@@ -26,14 +26,14 @@ class ConversionsController < ApplicationController
       f.write(file_contents)
     end
 
-    #####IN PROGRESS, trying to get cielo script to work
+    #If uploaded file is in cielo24 format, preprocess into SRT format
     if file_contents[0] == "["
       File.open("defaultcielo.txt", "wb+") do |f|
         f.write(file_contents)
       end
       %x(ruby preprocess_srt.rb defaultcielo.txt defaultsrt.srt)
     end
-    #######
+  
 
     #execute conversion script from default srt file to default xml file
     %x(ruby convert_srt_to_tei.rb defaultsrt.srt defaultxml.xml)
@@ -83,7 +83,7 @@ class ConversionsController < ApplicationController
   		#render "static_pages/home"
       #redirect_to @conversion
   	else
-  		render 'new'
+  		#redirect_to root_path
   	end
   end
 
