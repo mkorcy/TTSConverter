@@ -3,8 +3,8 @@
   <teiHeader>
     <fileDesc>
       <titleStmt>
-        <title/>
-        <author/>
+        <title>Alexander</title>
+        <author>Golin</author>
       </titleStmt>
       <extent/>
       <publicationStmt>
@@ -14,7 +14,7 @@
           <addrLine>16 Dearborn Road</addrLine>
           <addrLine>Somerville, MA, 02155</addrLine>
         </address>
-        <idno/>
+        <idno>1234</idno>
         <availability status="free">
           <p>This publication is freely available for scholarly or educational use.</p>
         </availability>
@@ -23,11 +23,9 @@
         <recordingStmt>
           <recording type="audio" dur="142501ms">
             <date/>
-            <equipment>
-              <p/>
-            </equipment>
+            <equipment>sduobs</equipment>
             <respStmt>
-              <resp/>
+              <resp>sdoinsdg</resp>
               <name/>
             </respStmt>
           </recording>
@@ -64,9 +62,9 @@
 <when id="timepoint_2" since="timepoint_begin" interval="140476"/>
 <when id="timepoint_end" since="timepoint_begin" interval="142501"/>
       </timeline><div1 id="transcript.1" n="Transcript"><u rend="transcript_chunk" start="timepoint_1" n="1" end="timepoint_2">
-<u>Can you believe Hank did that? He’s such a pig!</u>
+<u>I walk down her streets cause she’s my companion I walk through her hills cause she knows who I am</u>
 </u><u rend="transcript_chunk" start="timepoint_2" n="2" end="timepoint_3">
-<u>Yes, yes I can.</u>
+<u>She sees my good deeds, and she kisses me windy.</u>
 </u></div1>
 
     </body>

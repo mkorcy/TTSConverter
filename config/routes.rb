@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
-  root 'static_pages#home'
-  get 'convert' => 'conversions#new'
+  root 'conversions#new'
 
   resources :conversions
 
