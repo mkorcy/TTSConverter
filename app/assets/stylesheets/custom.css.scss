@@ -19,6 +19,7 @@ h1 {
 	color: #4f91cd;
 }
 
+
 #description {
     margin-bottom: 20px;
 }
@@ -36,7 +37,7 @@ h1 {
     width: 250px;
 }
 
-.filenamefield{
+.filenamefielddiv{
     display: block;
     margin: auto;
 }
@@ -44,11 +45,16 @@ h1 {
 #filenamefield{
     text-align: center;
     margin-top: 5px;
+    width: 200px;
+    margin-bottom: 20px;
 }
 
 .btn-file {
   position: relative;
   overflow: hidden;
+  background-color: #4f91cd;
+  border-color: #4f91cd;
+  color: white;
 }
 .btn-file input[type=file] {
   position: absolute;
@@ -70,7 +76,7 @@ h1 {
     background-color: #4f91cd;
     border: 0px;
     height: 40px;
-    width: 180px;
+    width: 200px;
     text-align: center;
     font-weight: 400;
     font-size:25px;

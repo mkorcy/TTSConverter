@@ -1,4 +1,21 @@
-<h1>Convert SRT to TEI</h1>
+<script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js'></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+						   
+	// Check that Jquery is working, delete later					 
+	$("div").css("border", "3px solid red");
+
+	//show name of selected file
+	$('#fileinputspan').change(function() {
+	    var filename = $('input[type=file]').val().split('\\').pop();
+	    $("#filenamefield").val(filename);
+	});
+	
+});
+</script>
+
+<h1>SRT to TEI Converter</h1>
 
 
 <% if @conversion.errors.any? %>
@@ -24,79 +41,20 @@
 	<%= f.label :description %>
 	<%= f.text_area :description, class: 'textarea', id: "description" %>
 	<br>
-	<span class="btn btn-default btn-file"> Select File
+	<span class="btn btn-default btn-file", id = "fileinputspan"> Select File
 		<%= f.file_field :file, class: 'fileinput', id: 'fileinput' %>
 	</span>
 	<br>
 
-	<div class="filenamefield">
+	<div class="filenamefielddiv">
 		<input type="text" class= "textinput" id="filenamefield" placeholder="No file selected">
 	</div>
 
 
-	<%= f.submit "Convert Now", id: "convertbutton", class: 'convertbutton', disabled:"disabled", onclick:"unhide(this,'convertagain')"%>
+	<%= f.submit "Convert Now", id: "convertbutton", class: 'convertbutton', onclick:"unhide(this,'convertagain')"%>
 <% end %>
 
 <div class="centered">
 	<button class="hidden" id="convertagain" type="button" >Convert Another File</button>
 </div>
 
-
-<script type="text/javascript">
-
-//function to unhide the convert again button after conversion
-function unhide(clickedButton, hiddenItem){
-	var item = document.getElementById(hiddenItem);
-	item.className = 'unhidden';
-}
-
-
-
-
-
-///////////////////////////JQuery///////////////////////////
-
-//makes sure that file size is less than 5MB
-  $('#conversion_file').bind('change', function() {
-    var size_in_megabytes = this.files[0].size/1024/1024;
-    if (size_in_megabytes > 5) {
-      alert('Maximum file size is 5MB. Please choose a smaller file.');
-    }
-  });
-
-
-
-  	$("#fileinput").change(function(){
-  		var filename = $('input[type=file]').val().split('\\').pop();
-        $("#filenamefield").attr("value", filename);
-	});
-
-
-/*
- $(document).ready(function(){
-    $('form > input').keyup(function() {
-
-        var empty = false;
-        $('form > input').each(function() {
-            if ($(this).val() == '') {
-                empty = true;
-            }
-        });
-
-
-
-        if($("#fileinput").value == ''){
-        	empty = true;
-        }
-
-
-
-        if (empty) {
-            $('#convertbutton').attr('disabled', 'disabled');
-        } else {
-            $('#convertbutton').removeAttr('disabled');
-        }
-    });
-});
-*/
-</script>
