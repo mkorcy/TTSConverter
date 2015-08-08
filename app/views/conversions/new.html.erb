@@ -7,12 +7,76 @@ $(document).ready(function(){
 	$("div").css("border", "3px solid red");
 
 	//show name of selected file
-	$('#fileinputspan').change(function() {
+	$('#fileinput').change(function() {
 	    var filename = $('input[type=file]').val().split('\\').pop();
 	    $("#filenamefield").val(filename);
 	});
+
+	//makes sure that file size is less than 5MB, maybe keep this
+  	$('#fileinput').bind('change', function() {
+    	var size_in_megabytes = this.files[0].size/1024/1024;
+    	if (size_in_megabytes > 5) {
+      		alert('Maximum file size is 5MB. Please choose a smaller file.');
+   		}
+  	});
+
+  	//client side validation, could definitely use more security
+  	//for example, if a user deletes their information after clicking validate, 
+  	//and then does not click validate again, form will still submit.
+	$("#validatebutton").click(function() {
+	  	var completeform = true
+	  	if ($('#titlefield').val() == ''){
+	  		completeform = false;
+	  	}
+	  	if ($('#authorfield').val() == ''){
+	  		completeform = false;
+	  	}
+	  	if ($('#pidfield').val() == ''){
+	  		completeform = false;
+	  	}
+	  	if ($('#recordingfield').val() == ''){
+	  		completeform = false;
+	  	}
+	  	if ($('#descriptionfield').val() == ''){
+	  		completeform = false;
+	  	}
+	  	if ($('#filenamefield').val() == ''){
+	  		completeform = false;
+	  	}
+
+	  	if (completeform) {
+	  		$('#validatebuttondiv').attr('class', 'hidden');
+	  		$('#convertbuttondiv').attr('class', 'unhidden');
+	  	}
+	});
 	
 });
+
+////////////////////JAVASCRIPT//////////////////////
+
+//function to unhide the convert again button after conversion
+function unhide(clickedButton, itemToShow, itemToHide, itemToHide2){
+	var item = document.getElementById(itemToShow);
+	item.className = 'unhidden';
+	item = document.getElementById(itemToHide);
+	item.className = 'hidden';
+	item = document.getElementById(itemToHide2);
+	item.className = 'hidden';
+}
+
+//function to reset form for another conversion
+function resetform(clickedButton){
+	document.getElementById("titlefield").value = '';
+	document.getElementById("authorfield").value = '';
+	document.getElementById("pidfield").value = '';
+	document.getElementById("recordingfield").value = '';
+	document.getElementById("descriptionfield").value = '';
+	document.getElementById("fileinput").value = '';
+	document.getElementById("filenamefield").value = '';
+	document.getElementById("validatebuttondiv").className = 'unhidden';
+	document.getElementById("convertagain").className = 'hidden';
+}
+
 </script>
 
 <h1>SRT to TEI Converter</h1>
@@ -27,19 +91,19 @@ $(document).ready(function(){
 
 <%= form_for @conversion do |f| %>
 	<%= f.label :title %>
-	<%= f.text_field :title, class: 'textinput' %>
+	<%= f.text_field :title, class: 'textinput', id: 'titlefield' %>
 	<br>
 	<%= f.label :author %>
-	<%= f.text_field :author, class: 'textinput' %>
+	<%= f.text_field :author, class: 'textinput', id: 'authorfield' %>
 	<br>
-	<%= f.label :pid, "PID" %>
-	<%= f.text_field :pid, class: 'textinput' %>
+	<%= f.label :pid, "PID"%>
+	<%= f.text_field :pid, class: 'textinput', id: 'pidfield' %>
 	<br>
 	<%= f.label :recording, "Recording Equipment" %>
-	<%= f.text_area :recording, class: 'textarea' %>
+	<%= f.text_area :recording, class: 'textarea', id: 'recordingfield'%>
 	<br>
 	<%= f.label :description %>
-	<%= f.text_area :description, class: 'textarea', id: "description" %>
+	<%= f.text_area :description, class: 'textarea', id: "descriptionfield" %>
 	<br>
 	<span class="btn btn-default btn-file", id = "fileinputspan"> Select File
 		<%= f.file_field :file, class: 'fileinput', id: 'fileinput' %>
@@ -50,11 +114,19 @@ $(document).ready(function(){
 		<input type="text" class= "textinput" id="filenamefield" placeholder="No file selected">
 	</div>
 
+	<div class="unhidden", id="validatebuttondiv">
+		<button type="button", class="convertbutton", id="validatebutton">Validate</button>
+	</div>
 
-	<%= f.submit "Convert Now", id: "convertbutton", class: 'convertbutton', onclick:"unhide(this,'convertagain')"%>
+	<br>
+
+	<div class="hidden", id="convertbuttondiv">
+		<%= f.submit "Convert Now", id: "convertbutton", class: 'convertbutton', onclick:"unhide(this,'convertagain', 'validatebuttondiv', 'convertbuttondiv')"%>
+	</div>
+
 <% end %>
 
 <div class="centered">
-	<button class="hidden" id="convertagain" type="button" >Convert Another File</button>
+	<button class="hidden" id="convertagain" type="button", onclick = "resetform(this)">Convert Another File</button>
 </div>
 
