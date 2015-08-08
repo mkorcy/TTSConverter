@@ -3,9 +3,6 @@
 <script type="text/javascript">
 $(document).ready(function(){ 
 						   
-	// Check that Jquery is working, delete later					 
-	$("div").css("border", "3px solid red");
-
 	//show name of selected file
 	$('#fileinput').change(function() {
 	    var filename = $('input[type=file]').val().split('\\').pop();
@@ -20,33 +17,71 @@ $(document).ready(function(){
    		}
   	});
 
+  	//validates that file is in txt or srt format
+	$("#fileinput").change(function() {
+	    var val = $(this).val();
+	    switch(val.substring(val.lastIndexOf('.') + 1).toLowerCase()){
+	        case 'txt': case 'srt':
+	            break;
+	        default:
+	            $(this).val('');
+	            // error message here
+	            $('#errormessages').html("File must be in SRT or TXT format.");
+	            break;
+	    }
+	});
+
   	//client side validation, could definitely use more security
   	//for example, if a user deletes their information after clicking validate, 
   	//and then does not click validate again, form will still submit.
 	$("#validatebutton").click(function() {
 	  	var completeform = true
+	  	var errors = 'ERRORS:' + "<br>";
 	  	if ($('#titlefield').val() == ''){
 	  		completeform = false;
+	  		errors = errors + 'Please specify title.' + "<br>";
 	  	}
 	  	if ($('#authorfield').val() == ''){
 	  		completeform = false;
+	  		errors = errors + 'Please specify author.' + "<br>";
 	  	}
 	  	if ($('#pidfield').val() == ''){
 	  		completeform = false;
+	  		errors = errors + 'Please specify PID.' + "<br>";
 	  	}
 	  	if ($('#recordingfield').val() == ''){
 	  		completeform = false;
+	  		errors = errors + 'Please specify recording equipment.' + "<br>";
 	  	}
 	  	if ($('#descriptionfield').val() == ''){
 	  		completeform = false;
+	  		errors = errors + 'Please describe the recording.' + "<br>";
 	  	}
 	  	if ($('#filenamefield').val() == ''){
 	  		completeform = false;
+	  		errors = errors + 'Please choose a file.' + "<br>";
+	  	}
+	  	else{
+		  	var val = $("#filenamefield").val();
+
+		    switch(val.substring(val.lastIndexOf('.') + 1).toLowerCase()){
+		        case 'txt': case 'srt':
+		            break;
+		        default:
+		            $(this).val('');
+		            errors = errors + "File must be in SRT or TXT format." +"<br>";
+		            completeform = false;
+		            break;
+		    }
 	  	}
 
 	  	if (completeform) {
 	  		$('#validatebuttondiv').attr('class', 'hidden');
 	  		$('#convertbuttondiv').attr('class', 'unhidden');
+	  		$('#errormessages').html('');
+	  	}
+	  	else{
+	  		$('#errormessages').html(errors);
 	  	}
 	});
 	
@@ -74,7 +109,7 @@ function resetform(clickedButton){
 	document.getElementById("fileinput").value = '';
 	document.getElementById("filenamefield").value = '';
 	document.getElementById("validatebuttondiv").className = 'unhidden';
-	document.getElementById("convertagain").className = 'hidden';
+	document.getElementById("convertagaindiv").className = 'hidden';
 }
 
 </script>
@@ -82,12 +117,7 @@ function resetform(clickedButton){
 <h1>SRT to TEI Converter</h1>
 
 
-<% if @conversion.errors.any? %>
-	<div class: 'errors'>
-		Please fill in all fields. File must be smaller than 5MB. 
-	</div>
-<% end %>
-
+<p id="errormessages"><p>
 
 <%= form_for @conversion do |f| %>
 	<%= f.label :title %>
@@ -115,18 +145,20 @@ function resetform(clickedButton){
 	</div>
 
 	<div class="unhidden", id="validatebuttondiv">
-		<button type="button", class="convertbutton", id="validatebutton">Validate</button>
+		<button type="button", class="bluebutton", id="validatebutton">Validate</button>
 	</div>
 
 	<br>
 
 	<div class="hidden", id="convertbuttondiv">
-		<%= f.submit "Convert Now", id: "convertbutton", class: 'convertbutton', onclick:"unhide(this,'convertagain', 'validatebuttondiv', 'convertbuttondiv')"%>
+		<%= f.submit "Convert Now", id: "convertbutton", class: 'bluebutton', onclick:"unhide(this,'convertagaindiv', 'validatebuttondiv', 'convertbuttondiv')"%>
 	</div>
 
+
+	<div class="hidden", id="convertagaindiv">
+		<button class="bluebutton" id="convertagainbutton" type="button", onclick = "resetform(this)">Convert Another File</button>
+	</div>
 <% end %>
 
-<div class="centered">
-	<button class="hidden" id="convertagain" type="button", onclick = "resetform(this)">Convert Another File</button>
-</div>
+
 
