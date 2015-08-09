@@ -21,7 +21,6 @@ class ConversionsController < ApplicationController
 
     #write contents of uploaded file to rails app default srt file
     #this write command overwrites any content already in default file
-
     File.open("defaultsrt.srt", "wb+") do |f|
       f.write(file_contents)
     end
@@ -38,8 +37,9 @@ class ConversionsController < ApplicationController
     #execute conversion script from default srt file to default xml file
     %x(ruby convert_srt_to_tei.rb defaultsrt.srt defaultxml.xml)
 
-    ########## MAKE ALL THESE INTO HELPER FUNCTION
+  
     #all this Nokogiri stuff adds the user inputted form items into the xml doc  
+    #these could definitely be turned into a helper function
     @doc = Nokogiri::XML(File.open("defaultxml.xml"))
 
     #insert title
@@ -60,7 +60,8 @@ class ConversionsController < ApplicationController
     puts pid.content
     File.write("defaultxml.xml", @doc.to_xml)
 
-    #THIS NEEDS TO BE FIXED, IT OVERWRITES <p> ELEMENT
+    #THIS NEEDS TO BE FIXED, IT OVERWRITES <p> ELEMENT, not sure how to 
+    #select a specific <p> element nested in other element.
     #insert recording details
     recording = @doc.at_css "equipment"
     recording.content = params[:conversion][:recording]
@@ -72,7 +73,7 @@ class ConversionsController < ApplicationController
     description.content = params[:conversion][:description]
     puts description.content
     File.write("defaultxml.xml", @doc.to_xml)
-    ##########
+   
 
     #read contents of converted file
     converted_contents = File.read("defaultxml.xml")
@@ -82,25 +83,16 @@ class ConversionsController < ApplicationController
       send_data converted_contents, :filename => 'ConversionResults.xml'
   		#render "static_pages/home"
       #redirect_to @conversion
-  	else
-  		#redirect_to root_path
   	end
   end
 
   private
 
-    def trialmethod(name)
-      name = 'Alexander'
-    end
-
+    #strong parameters
 	  def conversion_params
 	  	params.require(:conversion).permit(:title, :author, :pid, 
 	  									   :recording, :description, :file)
 	  end
-
-    def edit
-      @conversion = Conversion.find(params[:id])
-    end
 
 end
 

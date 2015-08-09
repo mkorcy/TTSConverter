@@ -3,8 +3,8 @@
   <teiHeader>
     <fileDesc>
       <titleStmt>
-        <title>h</title>
-        <author>h</author>
+        <title>j</title>
+        <author>j</author>
       </titleStmt>
       <extent/>
       <publicationStmt>
@@ -14,7 +14,7 @@
           <addrLine>16 Dearborn Road</addrLine>
           <addrLine>Somerville, MA, 02155</addrLine>
         </address>
-        <idno>h</idno>
+        <idno>j</idno>
         <availability status="free">
           <p>This publication is freely available for scholarly or educational use.</p>
         </availability>
@@ -23,9 +23,9 @@
         <recordingStmt>
           <recording type="audio" dur="1056800ms">
             <date/>
-            <equipment>h</equipment>
+            <equipment>j</equipment>
             <respStmt>
-              <resp>h</resp>
+              <resp>j</resp>
               <name/>
             </respStmt>
           </recording>

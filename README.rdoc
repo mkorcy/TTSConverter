@@ -1,28 +1,47 @@
 == README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This rails app serves as a web front end for a ruby
+conversion program. This app offers a form for Title, 
+Author, PID, Recording Equipment, Description, and 
+lastly, the file to be converted. 
 
-Things you may want to cover:
+This app accepts files in TXT and SRT format. It is 
+meant to convert both .srt and Cielo24 (.txt) files to 
+TEI format (.xml files). If the uploaded file is in 
+Cielo24 format, the program first converts it to SRT 
+format before converting the new .srt file to a .xml 
+file in TEI format.
 
-* Ruby version
+The Validate button is the only button made available
+until the user inputs all necessary fields and uploads 
+a .txt or .srt file, otherwise it will deliver error 
+messages each time it is pressed. 
 
-* System dependencies
+Once validation passes, the convert button shows up,
+and pressing this will convert the uploaded file and
+cause the browser to download the new TEI formatted 
+.xml file. After pressing the convert button, it will 
+be replaced with a Convert Again button. Pressing this 
+will reset the form and cause the validation button to 
+replace the convert now button.
 
-* Configuration
+Every time a conversion is successfully completed, the 
+data filled in by the user is stored in the database. 
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Relevant App Files:
+	app/models/conversion.rb
+	app/views/conversions/new.html.erb
+	app/controllers/conversions_controller
+	app/assets/stylesheets/custom.css.scss
 
 
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+Conversion Scripts:
+	convert_srt_to_tei.rb
+	preprocess_srt.rb
+	process_dir.rb
+	template.rb
+
+Permanent Files Used in Conversion Process:
+	defaultcielo.txt
+	defaultsrt.srt
+	defaultxml.xml

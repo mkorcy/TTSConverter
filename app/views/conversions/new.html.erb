@@ -1,6 +1,8 @@
 <script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js'></script>
 
 <script type="text/javascript">
+
+/////////////////////////JQuery///////////////////////////////
 $(document).ready(function(){ 
 						   
 	//show name of selected file
@@ -17,50 +19,45 @@ $(document).ready(function(){
    		}
   	});
 
-  	//validates that file is in txt or srt format
-	$("#fileinput").change(function() {
-	    var val = $(this).val();
-	    switch(val.substring(val.lastIndexOf('.') + 1).toLowerCase()){
-	        case 'txt': case 'srt':
-	            break;
-	        default:
-	            $(this).val('');
-	            // error message here
-	            $('#errormessages').html("File must be in SRT or TXT format.");
-	            break;
-	    }
-	});
-
   	//client side validation, could definitely use more security
   	//for example, if a user deletes their information after clicking validate, 
   	//and then does not click validate again, form will still submit.
 	$("#validatebutton").click(function() {
 	  	var completeform = true
+	  	//error messages
 	  	var errors = 'ERRORS:' + "<br>";
+
+		//check presence of title
 	  	if ($('#titlefield').val() == ''){
 	  		completeform = false;
 	  		errors = errors + 'Please specify title.' + "<br>";
 	  	}
+	  	//check presence of author
 	  	if ($('#authorfield').val() == ''){
 	  		completeform = false;
 	  		errors = errors + 'Please specify author.' + "<br>";
 	  	}
+	  	//check presence of pid
 	  	if ($('#pidfield').val() == ''){
 	  		completeform = false;
 	  		errors = errors + 'Please specify PID.' + "<br>";
 	  	}
+	  	//check presence of recording information
 	  	if ($('#recordingfield').val() == ''){
 	  		completeform = false;
 	  		errors = errors + 'Please specify recording equipment.' + "<br>";
 	  	}
+	  	//check presence of description
 	  	if ($('#descriptionfield').val() == ''){
 	  		completeform = false;
 	  		errors = errors + 'Please describe the recording.' + "<br>";
 	  	}
+	  	//check presence of uploaded file
 	  	if ($('#filenamefield').val() == ''){
 	  		completeform = false;
 	  		errors = errors + 'Please choose a file.' + "<br>";
 	  	}
+	  	//if a file is uploaded, check format
 	  	else{
 		  	var val = $("#filenamefield").val();
 
@@ -75,6 +72,7 @@ $(document).ready(function(){
 		    }
 	  	}
 
+	  	//if all fields present, show convert button, otherwise deliver errors
 	  	if (completeform) {
 	  		$('#validatebuttondiv').attr('class', 'hidden');
 	  		$('#convertbuttondiv').attr('class', 'unhidden');
@@ -119,6 +117,7 @@ function resetform(clickedButton){
 
 <p id="errormessages"><p>
 
+<!--form with three text fields, two text areas, one file upload field. -->
 <%= form_for @conversion do |f| %>
 	<%= f.label :title %>
 	<%= f.text_field :title, class: 'textinput', id: 'titlefield' %>
@@ -135,26 +134,30 @@ function resetform(clickedButton){
 	<%= f.label :description %>
 	<%= f.text_area :description, class: 'textarea', id: "descriptionfield" %>
 	<br>
+
+	<!--bootstrap styled file upload field-->
 	<span class="btn btn-default btn-file", id = "fileinputspan"> Select File
 		<%= f.file_field :file, class: 'fileinput', id: 'fileinput' %>
 	</span>
 	<br>
 
+	<!--text field to display file name, compensates for bootstrap styling-->
 	<div class="filenamefielddiv">
 		<input type="text" class= "textinput" id="filenamefield" placeholder="No file selected">
 	</div>
 
+	<!--validate button-->
 	<div class="unhidden", id="validatebuttondiv">
 		<button type="button", class="bluebutton", id="validatebutton">Validate</button>
 	</div>
-
 	<br>
 
+	<!--convert button-->
 	<div class="hidden", id="convertbuttondiv">
 		<%= f.submit "Convert Now", id: "convertbutton", class: 'bluebutton', onclick:"unhide(this,'convertagaindiv', 'validatebuttondiv', 'convertbuttondiv')"%>
 	</div>
 
-
+	<!--convert anther file button-->
 	<div class="hidden", id="convertagaindiv">
 		<button class="bluebutton" id="convertagainbutton" type="button", onclick = "resetform(this)">Convert Another File</button>
 	</div>
