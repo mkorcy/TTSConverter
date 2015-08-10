@@ -1,1 +1,0 @@
-This is my rails conversion app trial file.

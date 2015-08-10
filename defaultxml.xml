@@ -3,8 +3,8 @@
   <teiHeader>
     <fileDesc>
       <titleStmt>
-        <title>j</title>
-        <author>j</author>
+        <title>Alexander Golin</title>
+        <author>sdf</author>
       </titleStmt>
       <extent/>
       <publicationStmt>
@@ -14,7 +14,7 @@
           <addrLine>16 Dearborn Road</addrLine>
           <addrLine>Somerville, MA, 02155</addrLine>
         </address>
-        <idno>j</idno>
+        <idno>h</idno>
         <availability status="free">
           <p>This publication is freely available for scholarly or educational use.</p>
         </availability>
@@ -23,9 +23,9 @@
         <recordingStmt>
           <recording type="audio" dur="1056800ms">
             <date/>
-            <equipment>j</equipment>
+            <equipment>h</equipment>
             <respStmt>
-              <resp>j</resp>
+              <resp>h</resp>
               <name/>
             </respStmt>
           </recording>

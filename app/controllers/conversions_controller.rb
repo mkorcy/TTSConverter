@@ -80,7 +80,7 @@ class ConversionsController < ApplicationController
 
   	if @conversion.save
       #deliver converted contents to file download
-      send_data converted_contents, :filename => 'ConversionResults.xml'
+      send_data converted_contents, :filename => params[:conversion][:title]+' TEI.xml'
   		#render "static_pages/home"
       #redirect_to @conversion
   	end
